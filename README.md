@@ -24,9 +24,9 @@ To simplify environment setup and allow you to jump straight into solving the te
 ## Get started.
 1. Clone this repository https://github.com/FOODit/FOODit-JavaTest.git
 
-2. Run mvn:install to install the application
+2. Run mvn install to install the application
 
-3. Run mvn:appengine:devserver to start the application locally.
+3. Run mvn appengine:devserver to start the application locally.
 
 4. Start writing the code to expose the data required in the test.
 
