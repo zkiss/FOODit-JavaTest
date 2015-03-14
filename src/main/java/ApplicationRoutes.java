@@ -1,9 +1,10 @@
+import static com.threewks.thundr.route.RouteType.GET;
+
 import com.foodit.test.sample.controller.DataLoadController;
+import com.foodit.test.sample.controller.ReportsController;
 import com.threewks.thundr.action.method.MethodAction;
 import com.threewks.thundr.route.Route;
 import com.threewks.thundr.route.Routes;
-
-import static com.threewks.thundr.route.RouteType.GET;
 
 public class ApplicationRoutes {
 	public static class Names {
@@ -23,12 +24,24 @@ public class ApplicationRoutes {
 	}
 
 	public void addRoutes(Routes routes) {
-
 		// Loader
 		routes.addRoute(new Route(GET, "/load/", Names.LoadData), new MethodAction(DataLoadController.class, "load"));
 
 		// Instructions
 		routes.addRoute(new Route(GET, "/", Names.ViewInstructions), new MethodAction(DataLoadController.class, "instructions"));
 		routes.addRoute(new Route(GET, "/restaurant/{restaurant}/download", Names.ViewData), new MethodAction(DataLoadController.class, "viewData"));
+
+		// Solution
+		routes.addRoute(new Route(GET, "/reports/orders/{restaurant}", "orders-restaurant"),
+				new MethodAction(ReportsController.class, "orders"));
+
+		routes.addRoute(new Route(GET, "/reports/sales/{restaurant}", "sales-restaurant"),
+				new MethodAction(ReportsController.class, "sales"));
+
+		routes.addRoute(new Route(GET, "/reports/topmeals", "topmeals"),
+				new MethodAction(ReportsController.class, "topMeals"));
+
+		routes.addRoute(new Route(GET, "/reports/topcategories", "count-orders"),
+				new MethodAction(ReportsController.class, "topCategories"));
 	}
 }
