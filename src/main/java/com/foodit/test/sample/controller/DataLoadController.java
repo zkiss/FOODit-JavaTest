@@ -12,12 +12,10 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.foodit.test.sample.entities.RestaurantData;
-
 import com.foodit.test.sample.entities.MenuItem;
 import com.foodit.test.sample.entities.Order;
 import com.foodit.test.sample.entities.Order.Item;
-import com.foodit.test.sample.math.FinancialMathContext;
+import com.foodit.test.sample.entities.RestaurantData;
 import com.google.appengine.labs.repackaged.com.google.common.collect.Lists;
 import com.google.common.io.Resources;
 import com.google.gson.JsonArray;
@@ -71,7 +69,7 @@ public class DataLoadController {
 			for (JsonElement itemElement : itemsInCat) {
 				JsonObject itemJson = itemElement.getAsJsonObject();
 				MenuItem item = new MenuItem();
-				item.setRestaurant(Key.create(RestaurantData.class, restaurantData.getRestaurant()));
+				item.setRestaurant(Key.create(restaurantData));
 				item.setId(String.valueOf(itemJson.getAsJsonPrimitive("id").getAsLong()));
 				item.setName(itemJson.getAsJsonPrimitive("name").getAsString());
 				item.setCategory(itemJson.getAsJsonPrimitive("category").getAsString());
@@ -101,7 +99,7 @@ public class DataLoadController {
 				}
 				Item item = new Item();
 				item.setId(Key.create(
-						Key.create(RestaurantData.class, restaurantData.getRestaurant()),
+						Key.create(restaurantData),
 						MenuItem.class,
 						String.valueOf(itemJson.getAsJsonPrimitive("id").getAsLong())));
 				item.setTotal(itemJson.getAsJsonPrimitive("total").getAsBigDecimal());
@@ -109,8 +107,7 @@ public class DataLoadController {
 			}
 			orders.add(order);
 
-			// TODO use bank math context
-			restaurantData.incSales(order.getTotalValue(), FinancialMathContext.FINANCIAL);
+			restaurantData.incSales(order.getTotalValue());
 		}
 		ofy().save().entities(orders);
 	}

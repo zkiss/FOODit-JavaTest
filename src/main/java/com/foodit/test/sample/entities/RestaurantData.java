@@ -1,7 +1,6 @@
 package com.foodit.test.sample.entities;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -36,11 +35,11 @@ public class RestaurantData {
 		this.sales = new OfyBigDecimal(sales);
 	}
 
-	public void incSales(BigDecimal increment, MathContext mc) {
+	public void incSales(BigDecimal increment) {
 		if (sales == null) {
 			sales = new OfyBigDecimal(increment);
 		} else {
-			sales = new OfyBigDecimal(sales.getValue().add(increment, mc));
+			sales = new OfyBigDecimal(sales.getValue().add(increment));
 		}
 	}
 
