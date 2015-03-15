@@ -14,8 +14,14 @@ public class Order {
 
 	@Embed
 	public static class Item {
+		/*
+		 * Originally I had price in here as well. I ended up not using it but I did not refactor the code to use a
+		 * Key<MenuItem> list instead of this wrapper class.
+		 * 
+		 * Originally wanted to have the price here because in case of a price change this is the accurate amount the
+		 * user has spent on this item.
+		 */
 		private Key<MenuItem> id;
-		private OfyBigDecimal total;
 
 		public Key<MenuItem> getId() {
 			return this.id;
@@ -24,15 +30,6 @@ public class Order {
 		public void setId(Key<MenuItem> id) {
 			this.id = id;
 		}
-
-		public BigDecimal getTotal() {
-			return this.total.getValue();
-		}
-
-		public void setTotal(BigDecimal total) {
-			this.total = new OfyBigDecimal(total);
-		}
-
 	}
 
 	// couldn't filter count if this was a @Parent Key

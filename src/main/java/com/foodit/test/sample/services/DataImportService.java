@@ -91,7 +91,6 @@ public class DataImportService {
 						Key.create(restaurantData),
 						MenuItem.class,
 						String.valueOf(itemJson.getAsJsonPrimitive("id").getAsLong())));
-				item.setTotal(itemJson.getAsJsonPrimitive("total").getAsBigDecimal());
 				order.getItems().add(item);
 			}
 			orders.add(order);

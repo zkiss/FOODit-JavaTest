@@ -21,6 +21,8 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 
 	/*
 	 * I need a good DI framework for testing implementation from end to end. Using Spring.
+	 * 
+	 * Chose to test it this way because this is not sensitive to internal refactoring and movement of logic
 	 */
 
 	private DataImportService service;
@@ -71,5 +73,41 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 		});
 		int orderCount = ofy.load().type(Order.class).count();
 		assertThat(orderCount).isEqualTo(0);
+	}
+
+	@Test
+	public void givenMenuItemWithOrders_whenImportFromFile_thenSetsNumbers() {
+		service.importFromFile("simpleorder");
+
+		ofy.clear();
+		MenuItem item = loadMenu("simpleorder", "1");
+		assertThat(item.getOrderCount()).isEqualTo(2);
+
+		RestaurantData restaurantData = loadRestaurant("simpleorder");
+		assertThat(restaurantData.getSales()).isEqualByComparingTo("21");
+	}
+
+	@Test
+	public void givenMissingMenuItem_whenImportFromFile_thenDoesNotFail() {
+		service.importFromFile("missingmenuitem");
+
+		ofy.clear();
+		int menuCount = ofy.load().type(MenuItem.class).count();
+		assertThat(menuCount).isEqualTo(0);
+		int orderCount = ofy.load().type(Order.class).count();
+		assertThat(orderCount).isEqualTo(2);
+		RestaurantData data = loadRestaurant("missingmenuitem");
+		assertThat(data.getSales()).isEqualByComparingTo("21.051");
+	}
+
+	private MenuItem loadMenu(String restaurant, String id) {
+		return ofy.load().key(Key.create(
+				Key.create(new RestaurantData(restaurant)),
+				MenuItem.class,
+				id)).now();
+	}
+
+	private RestaurantData loadRestaurant(String id) {
+		return ofy.load().type(RestaurantData.class).id(id).now();
 	}
 }
