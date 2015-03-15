@@ -1,5 +1,8 @@
 package com.foodit.test.sample.controller;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,9 +38,11 @@ public class ReportsController {
 	public JsonView sales(String restaurant) {
 		Logger.info("Counting sales for restaurant: %s", restaurant);
 
-		double sales = 0;
+		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);
+
+		BigDecimal sales = BigDecimal.ZERO;
 		for (Order order : ObjectifyService.ofy().load().type(Order.class).filter("restaurant", restaurant)) {
-			sales += order.getTotalValue();
+			sales = sales.add(order.getTotalValue(), mc);
 		}
 
 		return new JsonView(new SalesAmount(sales));

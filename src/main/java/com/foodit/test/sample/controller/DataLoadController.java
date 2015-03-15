@@ -86,7 +86,7 @@ public class DataLoadController {
 			Order order = new Order();
 			order.setRestaurant(key.getName());
 			order.setId(orderJson.getAsJsonPrimitive("orderId").getAsLong());
-			order.setTotalValue(orderJson.getAsJsonPrimitive("totalValue").getAsDouble());
+			order.setTotalValue(orderJson.getAsJsonPrimitive("totalValue").getAsBigDecimal());
 			order.setItems(new LinkedList<Item>());
 			for (JsonElement itemElement : orderJson.get("lineItems").getAsJsonArray()) {
 				JsonObject itemJson = itemElement.getAsJsonObject();
@@ -96,7 +96,7 @@ public class DataLoadController {
 				}
 				Item item = new Item();
 				item.setId(Key.create(key, MenuItem.class, itemJson.getAsJsonPrimitive("id").getAsLong() + ""));
-				item.setTotal(itemJson.getAsJsonPrimitive("total").getAsDouble());
+				item.setTotal(itemJson.getAsJsonPrimitive("total").getAsBigDecimal());
 				order.getItems().add(item);
 			}
 			orders.add(order);

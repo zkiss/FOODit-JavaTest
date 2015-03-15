@@ -1,5 +1,6 @@
 package com.foodit.test.sample.entities;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -14,9 +15,7 @@ public class Order {
 	@Embed
 	public static class Item {
 		private Key<MenuItem> id;
-		// reason for sloppyness: no time to figure out the correct way
-		// No support for BigDecimal
-		private double total;
+		private OfyBigDecimal total;
 
 		public Key<MenuItem> getId() {
 			return this.id;
@@ -26,12 +25,12 @@ public class Order {
 			this.id = id;
 		}
 
-		public double getTotal() {
-			return this.total;
+		public BigDecimal getTotal() {
+			return this.total.getValue();
 		}
 
-		public void setTotal(double total) {
-			this.total = total;
+		public void setTotal(BigDecimal total) {
+			this.total = new OfyBigDecimal(total);
 		}
 
 	}
@@ -47,12 +46,7 @@ public class Order {
 	@Id
 	private long id;
 
-	// No support for BigDecimal
-	// best I could find was com.googlecode.objectify.annotation.Translate
-	// VERY tedious.
-	// we'll live with the imprecisions.
-	// reason for sloppyness: no time to figure out the correct way
-	private double totalValue;
+	private OfyBigDecimal totalValue;
 	private List<Item> items;
 
 	public String getRestaurant() {
@@ -71,12 +65,12 @@ public class Order {
 		this.id = id;
 	}
 
-	public double getTotalValue() {
-		return this.totalValue;
+	public BigDecimal getTotalValue() {
+		return this.totalValue.getValue();
 	}
 
-	public void setTotalValue(double totalValue) {
-		this.totalValue = totalValue;
+	public void setTotalValue(BigDecimal totalValue) {
+		this.totalValue = new OfyBigDecimal(totalValue);
 	}
 
 	public List<Item> getItems() {
