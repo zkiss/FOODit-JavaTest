@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import java.util.List;
 import java.util.Map;
 
 import com.foodit.test.sample.entities.MenuItem;
@@ -31,6 +32,10 @@ public class MenuItemDao {
 
 	public Result<Key<MenuItem>> saveAsync(MenuItem item) {
 		return api.ofy().save().entity(item);
+	}
+
+	public List<MenuItem> loadAll() {
+		return api.ofy().load().type(MenuItem.class).list();
 	}
 
 }

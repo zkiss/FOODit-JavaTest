@@ -32,7 +32,7 @@ public class OrderImportService {
 		 * 1. when processing the json
 		 * 2. when processing the resulting entities
 		 * Upside is separation of concerns - business logic (data integrity) and json parsing
-		 *
+		 * 
 		 * Visitor pattern could solve this but that would have put the parsing logic in control of this business logic
 		 * (relying on a callback).
 		 */
@@ -42,6 +42,12 @@ public class OrderImportService {
 				MenuItem menuItem = menuDao.load(item.getId());
 				if (menuItem == null) {
 					Logger.warn("Data integrity error: MenuItem not found: " + item.getId());
+					/*
+					 * Possibly a menu item which has been deleted after the order was placed. I'll ignore these as a
+					 * report like this is probably more interested in items which are still live. If we wanted to
+					 * present this data on the GUI we wouldn't be able to get any data about the deleted menu item
+					 * anyways.
+					 */
 					continue;
 				}
 				menuItem.incOrderCount();

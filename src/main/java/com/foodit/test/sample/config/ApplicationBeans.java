@@ -6,6 +6,7 @@ import com.foodit.test.sample.persistence.OrderDao;
 import com.foodit.test.sample.persistence.RestaurantDataDao;
 import com.foodit.test.sample.services.DataImportService;
 import com.foodit.test.sample.services.MenuImportService;
+import com.foodit.test.sample.services.MenuStatsService;
 import com.foodit.test.sample.services.OrderImportService;
 import com.threewks.thundr.injection.UpdatableInjectionContext;
 
@@ -16,6 +17,7 @@ public class ApplicationBeans {
 		inject(injectionContext, RestaurantDataDao.class);
 		inject(injectionContext, OrderDao.class);
 		inject(injectionContext, MenuItemDao.class);
+		inject(injectionContext, MenuStatsService.class);
 		inject(injectionContext, MenuImportService.class);
 		inject(injectionContext, OrderImportService.class);
 		inject(injectionContext, DataImportService.class);

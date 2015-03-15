@@ -53,6 +53,11 @@ public class MenuItem {
 		this.category = category;
 	}
 
+	/**
+	 * Number of times this item was ordered during it's lifetime
+	 * 
+	 * @return order count
+	 */
 	public int getOrderCount() {
 		return this.orderCount;
 	}
