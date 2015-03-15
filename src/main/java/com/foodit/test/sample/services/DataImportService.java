@@ -31,7 +31,7 @@ import org.apache.commons.io.IOUtils;
 public class DataImportService {
 
 	@Inject
-	private RestaurantDataDao dao;
+	private RestaurantDataDao restaurantDao;
 	@Inject
 	private MenuImportService menuSvc;
 	@Inject
@@ -40,12 +40,12 @@ public class DataImportService {
 	public void importFromFile(String restaurantId) {
 		Logger.info("Importing data for restaurant %s", restaurantId);
 		RestaurantData restaurantLoadData = new RestaurantData(restaurantId);
-		dao.save(restaurantLoadData);
+		restaurantDao.save(restaurantLoadData);
 
 		List<MenuItem> menuItems = parseMenu(restaurantLoadData, readFile(String.format("menu-%s.json", restaurantId)));
 		menuSvc.saveMenu(menuItems);
 
-		List<Order> orders = saveOrders(restaurantLoadData, readFile(String.format("orders-%s.json", restaurantId)));
+		List<Order> orders = parseOrders(restaurantLoadData, readFile(String.format("orders-%s.json", restaurantId)));
 		orderSvc.saveOrders(restaurantLoadData, orders);
 	}
 
@@ -68,7 +68,7 @@ public class DataImportService {
 		return menu;
 	}
 
-	private List<Order> saveOrders(RestaurantData restaurantData, String json) {
+	private List<Order> parseOrders(RestaurantData restaurantData, String json) {
 		LinkedList<Order> orders = new LinkedList<>();
 		JsonArray root = new JsonParser().parse(json).getAsJsonArray();
 		for (JsonElement orderElement : root) {
