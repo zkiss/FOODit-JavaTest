@@ -5,6 +5,9 @@ import java.math.BigInteger;
 
 import com.googlecode.objectify.annotation.Embed;
 
+/**
+ * Stores a {@link BigDecimal}
+ */
 @Embed
 // No support for BigDecimal
 // best I could find was com.googlecode.objectify.annotation.Translate - VERY tedious.
