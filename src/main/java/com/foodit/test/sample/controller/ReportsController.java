@@ -68,6 +68,15 @@ public class ReportsController {
 		 * 3. build the most accurate leaderboard on the fly and accept the query could run for a while - for this I
 		 * probably should use the task api and have a separate endpoint for querying task execution result. I won't do
 		 * this now, but I recognize the fact that this solution can easily time out.
+		 *
+		 * My expectation is that there are significantly less menu item records than orders and that it is not too bad
+		 * to even iterate them through in a report request.
+		 *
+		 * If menu items don't all fit in the memory then a merge sort can be used by sorting chunks of the data and
+		 * saving the sorted chunks on the disk. Then these chunks can be merged without having to load all the data in
+		 * the memory using a merge sort unti we have a file which contains all the data in order. Then we just have to
+		 * read up the top x record. In this case though it's definitely worth saving the result somewhere and
+		 * maintaining it.
 		 */
 
 		// let's do top 10
@@ -83,6 +92,14 @@ public class ReportsController {
 
 	public void topCategories() {
 		// TODO
+		/*
+		 * create a Category entity
+		 * then same approach as with menu items
+		 * thing to consider here is deprecated categories - if all the menu items are removed from a category then the
+		 * category entity becomes a phantom one. This could be fixed for example by firing up a maintenance task
+		 * periodically to deal with these records.
+		 * 
+		 * I chose not to do this as this task has taken all my weekend already
+		 */
 	}
-
 }
