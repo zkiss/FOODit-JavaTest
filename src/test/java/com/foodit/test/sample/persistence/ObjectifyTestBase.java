@@ -1,5 +1,6 @@
 package com.foodit.test.sample.persistence;
 
+import com.foodit.test.sample.config.ObjectifyConfig;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.googlecode.objectify.Objectify;
@@ -19,6 +20,7 @@ public class ObjectifyTestBase {
 	@Before
 	public final void setUpBase() {
 		helper.setUp();
+		new ObjectifyConfig().configure();
 		this.ofy = ObjectifyService.ofy();
 	}
 

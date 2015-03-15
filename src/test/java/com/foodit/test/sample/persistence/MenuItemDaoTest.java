@@ -5,11 +5,9 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 
-import com.foodit.test.sample.config.ObjectifyConfig;
 import com.foodit.test.sample.entities.MenuItem;
 import com.foodit.test.sample.entities.RestaurantData;
 import com.googlecode.objectify.Key;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,11 +22,6 @@ public class MenuItemDaoTest extends ObjectifyTestBase {
 
 	@InjectMocks
 	private MenuItemDao dao;
-
-	@Before
-	public void setUp() throws Exception {
-		new ObjectifyConfig().configure();
-	}
 
 	@Test
 	public void whenSaveAsync_thenDataIsFouncWhenLoaded() {
