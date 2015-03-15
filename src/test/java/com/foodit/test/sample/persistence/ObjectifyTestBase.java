@@ -7,6 +7,9 @@ import com.googlecode.objectify.ObjectifyService;
 import org.junit.After;
 import org.junit.Before;
 
+/**
+ * Base class for testing code which needs Objectify
+ */
 public class ObjectifyTestBase {
 
 	protected final LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
