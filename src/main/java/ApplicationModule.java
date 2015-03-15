@@ -1,7 +1,8 @@
-import com.foodit.test.sample.entities.RestaurantData;
+import com.foodit.test.sample.config.ApplicationRoutes;
 
 import com.foodit.test.sample.entities.MenuItem;
 import com.foodit.test.sample.entities.Order;
+import com.foodit.test.sample.entities.RestaurantData;
 import com.googlecode.objectify.ObjectifyService;
 import com.threewks.thundr.gae.GaeModule;
 import com.threewks.thundr.gae.objectify.ObjectifyModule;
@@ -13,7 +14,7 @@ import com.threewks.thundr.route.Routes;
 public class ApplicationModule extends BaseModule {
 
 	/*
-	 *
+	 * thundr desing ENCOURAGES BAD PRACTICE - module in default package by default
 	 */
 
 	private ApplicationRoutes applicationRoutes = new ApplicationRoutes();

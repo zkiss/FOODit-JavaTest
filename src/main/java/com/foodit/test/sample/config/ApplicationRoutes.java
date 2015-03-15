@@ -1,3 +1,4 @@
+package com.foodit.test.sample.config;
 import static com.threewks.thundr.route.RouteType.GET;
 
 import com.foodit.test.sample.controller.DataLoadController;
