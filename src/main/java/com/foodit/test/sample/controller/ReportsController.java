@@ -19,6 +19,17 @@ import com.threewks.thundr.view.json.JsonView;
 
 public class ReportsController {
 
+	/*
+	 * A general approach I've taken here is that I do part of these calculations at data insertion time. I have assumed
+	 * that these endpoints are called frequently enough so that it is worth it. An other approach could be to calculate
+	 * everything on the fly based on the order and menu item records, but with millions of records that would probably
+	 * take a very long time. And requests would time out.
+	 * 
+	 * Long running tasks could probably be executed using the tasks api. To be honest I don't know how to use them
+	 * exactly and with all the research this task required me to do I have prioritised this lower. Practically I am
+	 * unfamiliar with every API here.
+	 */
+
 	@Inject
 	private OrderDao orderDao;
 	@Inject
