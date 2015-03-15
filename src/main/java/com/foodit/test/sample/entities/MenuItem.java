@@ -19,6 +19,8 @@ public class MenuItem {
 	private String name;
 	private String category;
 
+	private int orderCount;
+
 	public Key<RestaurantData> getRestaurant() {
 		return this.restaurant;
 	}
@@ -49,6 +51,18 @@ public class MenuItem {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public int getOrderCount() {
+		return this.orderCount;
+	}
+
+	public void setOrderCount(int orderCount) {
+		this.orderCount = orderCount;
+	}
+
+	public void incOrderCount() {
+		this.orderCount++;
 	}
 
 }

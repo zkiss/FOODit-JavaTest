@@ -32,7 +32,7 @@ public class ApplicationRoutes {
 		 */
 
 		// Loader
-		routes.addRoute(new Route(GET, "/load/", Names.LoadData), new MethodAction(DataLoadController.class, "load"));
+		routes.addRoute(new Route(GET, "/load/", Names.LoadData), new MethodAction(DataLoadController.class, "loadAll"));
 
 		// Instructions
 		routes.addRoute(new Route(GET, "/", Names.ViewInstructions), new MethodAction(DataLoadController.class, "instructions"));

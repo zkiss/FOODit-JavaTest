@@ -1,8 +1,12 @@
 package com.foodit.test.sample.config;
 
+import com.foodit.test.sample.persistence.MenuItemDao;
 import com.foodit.test.sample.persistence.ObjectifyApi;
 import com.foodit.test.sample.persistence.OrderDao;
 import com.foodit.test.sample.persistence.RestaurantDataDao;
+import com.foodit.test.sample.services.DataImportService;
+import com.foodit.test.sample.services.MenuImportService;
+import com.foodit.test.sample.services.OrderImportService;
 import com.threewks.thundr.injection.UpdatableInjectionContext;
 
 public class ApplicationBeans {
@@ -11,6 +15,10 @@ public class ApplicationBeans {
 		inject(injectionContext, ObjectifyApi.class);
 		inject(injectionContext, RestaurantDataDao.class);
 		inject(injectionContext, OrderDao.class);
+		inject(injectionContext, MenuItemDao.class);
+		inject(injectionContext, MenuImportService.class);
+		inject(injectionContext, OrderImportService.class);
+		inject(injectionContext, DataImportService.class);
 	}
 
 	private <T> void inject(UpdatableInjectionContext injectionContext, Class<T> type) {

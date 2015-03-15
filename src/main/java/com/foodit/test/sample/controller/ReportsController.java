@@ -34,7 +34,7 @@ public class ReportsController {
 		Logger.info("Counting orders for restaurant: %s", restaurant);
 
 		/*
-		 * This could also be saved to RestaurantData but I thought count should be fast enough
+		 * This could also be saved to RestaurantData same way as sales but I thought count should be fast enough
 		 */
 		int count = orderDao.countByRestaurant(restaurant);
 
@@ -51,6 +51,17 @@ public class ReportsController {
 
 	public JsonView topMeals() {
 		Logger.info("Calculating top meals");
+
+		/*
+		 * Leaderboard problem. NoSQL is not really suited for this. Depending on how accurate results we want and how
+		 * frequently we need this there are multiple ways to go about this.
+		 * 
+		 * 1. export stats to a relational db
+		 * 2. maintain leaderboard periodically in a background task and query that
+		 * 3. build the most accurate leaderboard on the fly and accept the query could run for a while - for this I
+		 * probably should use the task api and have a separate endpoint for querying task execution result. I won't do
+		 * this now, but I recognize the fact that this solution can easily time out.
+		 */
 
 		HashMap<String, MealOrderCount> orders = new HashMap<>();
 		for (Order order : ObjectifyService.ofy().load().type(Order.class)) {

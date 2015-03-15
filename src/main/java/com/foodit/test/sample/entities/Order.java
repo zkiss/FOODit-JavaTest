@@ -35,7 +35,8 @@ public class Order {
 
 	}
 
-	// couldn't filter count if this was a Key
+	// couldn't filter count if this was a @Parent Key
+	// docs are a bit vague on what and how you can filter on with filterKey
 	/*
 	 * the lack of Key object here is not necessarily bad, but since Objectify explicitly supports references it seems
 	 * semantically wrong not using it when what we are dealing with here is actually an entity relation.
