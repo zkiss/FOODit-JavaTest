@@ -2,37 +2,22 @@ package com.foodit.test.sample.persistence;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
-import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ObjectifyApiTest {
-
-	private final LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
+public class ObjectifyApiTest extends ObjectifyTestBase {
 
 	private ObjectifyApi api;
-	private Objectify ofy;
 
 	@Before
 	public void setUp() {
 		api = new ObjectifyApi();
-
-		helper.setUp();
 		ObjectifyService.register(TestEntity.class);
 		ObjectifyService.register(TestEntityStringKey.class);
-		this.ofy = ObjectifyService.ofy();
-	}
-
-	@After
-	public void tearDown() {
-		helper.tearDown();
 	}
 
 	@Test
