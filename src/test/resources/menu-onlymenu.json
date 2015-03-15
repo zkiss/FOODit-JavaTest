@@ -1,0 +1,19 @@
+{
+    "menu": {
+        "Category 1":[
+            {
+                "id": 1,
+                "name": "Item Name",
+                "category": "Item Category",
+                "other attribute": {
+                    "other data": 123
+                }
+            },
+            {
+                "id": 2,
+                "name": "Second Item",
+                "category": "Second Category"
+            }
+        ]
+    }
+}
