@@ -17,6 +17,7 @@ import com.foodit.test.sample.entities.Order;
 import com.foodit.test.sample.entities.Order.Item;
 import com.foodit.test.sample.entities.RestaurantData;
 import com.foodit.test.sample.persistence.OrderDao;
+import com.foodit.test.sample.persistence.RestaurantDataDao;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 import com.threewks.thundr.logger.Logger;
@@ -26,6 +27,8 @@ public class ReportsController {
 
 	@Inject
 	private OrderDao orderDao;
+	@Inject
+	private RestaurantDataDao restaurantDataDao;
 
 	public JsonView orders(String restaurant) {
 		Logger.info("Counting orders for restaurant: %s", restaurant);
@@ -41,7 +44,7 @@ public class ReportsController {
 	public JsonView sales(String restaurant) {
 		Logger.info("Counting sales for restaurant: %s", restaurant);
 
-		RestaurantData data = ObjectifyService.ofy().load().type(RestaurantData.class).id(restaurant).now();
+		RestaurantData data = restaurantDataDao.load(restaurant);
 
 		return new JsonView(new SalesAmount(data.getSales()));
 	}
