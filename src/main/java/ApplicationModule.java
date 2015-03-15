@@ -10,6 +10,11 @@ import com.threewks.thundr.module.DependencyRegistry;
 import com.threewks.thundr.route.Routes;
 
 public class ApplicationModule extends BaseModule {
+
+	/*
+	 *
+	 */
+
 	private ApplicationRoutes applicationRoutes = new ApplicationRoutes();
 
 	@Override
@@ -23,6 +28,7 @@ public class ApplicationModule extends BaseModule {
 	public void configure(UpdatableInjectionContext injectionContext) {
 		super.configure(injectionContext);
 		configureObjectify();
+		// injectionContext.inject(Test.class).as(Test.class);
 	}
 
 	@Override

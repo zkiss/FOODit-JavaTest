@@ -24,6 +24,10 @@ public class ApplicationRoutes {
 	}
 
 	public void addRoutes(Routes routes) {
+		/*
+		 * Thundr seems to be sensitive to renaming controller methods and I did not find a way around this.
+		 */
+
 		// Loader
 		routes.addRoute(new Route(GET, "/load/", Names.LoadData), new MethodAction(DataLoadController.class, "load"));
 
@@ -32,6 +36,11 @@ public class ApplicationRoutes {
 		routes.addRoute(new Route(GET, "/restaurant/{restaurant}/download", Names.ViewData), new MethodAction(DataLoadController.class, "viewData"));
 
 		// Solution
+
+		/*
+		 * renaming variable breaks the parameter passing. parameter name is only available if compiled with debug info.
+		 * how does it work if it's not compiled like that???
+		 */
 		routes.addRoute(new Route(GET, "/reports/orders/{restaurant}", "orders-restaurant"),
 				new MethodAction(ReportsController.class, "orders"));
 

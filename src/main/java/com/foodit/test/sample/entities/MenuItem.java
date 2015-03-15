@@ -13,6 +13,8 @@ public class MenuItem {
 	private Key<RestaurantData> restaurant;
 
 	@Id
+	// reason for sloppyness: bad data
+	// String because there are menu items with the value 0 which is rejected by objectify
 	private String id;
 
 	private String name;

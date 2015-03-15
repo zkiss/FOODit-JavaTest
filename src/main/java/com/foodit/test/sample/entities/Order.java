@@ -14,6 +14,7 @@ public class Order {
 	@Embed
 	public static class Item {
 		private Key<MenuItem> id;
+		// reason for sloppyness: no time to figure out the correct way
 		// No support for BigDecimal
 		private double total;
 
@@ -36,6 +37,10 @@ public class Order {
 	}
 
 	// couldn't filter count if this was a Key
+	/*
+	 * the lack of Key object here is not necessarily bad, but since Objectify explicitly supports references it seems
+	 * semantically wrong not using it when what we are dealing with here is actually an entity relation.
+	 */
 	@Index
 	private String restaurant;
 
@@ -46,6 +51,7 @@ public class Order {
 	// best I could find was com.googlecode.objectify.annotation.Translate
 	// VERY tedious.
 	// we'll live with the imprecisions.
+	// reason for sloppyness: no time to figure out the correct way
 	private double totalValue;
 	private List<Item> items;
 
