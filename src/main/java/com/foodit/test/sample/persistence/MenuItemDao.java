@@ -18,10 +18,6 @@ public class MenuItemDao {
 	@Inject
 	private ObjectifyApi api;
 
-	public MenuItem load(String id) {
-		return api.load(MenuItem.class, id);
-	}
-
 	public MenuItem load(Key<MenuItem> key) {
 		return api.ofy().load().key(key).now();
 	}
