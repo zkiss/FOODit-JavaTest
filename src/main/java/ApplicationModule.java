@@ -1,10 +1,6 @@
+import com.foodit.test.sample.config.ApplicationBeans;
 import com.foodit.test.sample.config.ApplicationRoutes;
-import com.foodit.test.sample.entities.MenuItem;
-import com.foodit.test.sample.entities.Order;
-import com.foodit.test.sample.entities.RestaurantData;
-import com.foodit.test.sample.persistence.ObjectifyApi;
-import com.foodit.test.sample.persistence.RestaurantDataDao;
-import com.googlecode.objectify.ObjectifyService;
+import com.foodit.test.sample.config.ObjectifyConfig;
 import com.threewks.thundr.gae.GaeModule;
 import com.threewks.thundr.gae.objectify.ObjectifyModule;
 import com.threewks.thundr.injection.BaseModule;
@@ -18,7 +14,9 @@ public class ApplicationModule extends BaseModule {
 	 * thundr desing ENCOURAGES BAD PRACTICE - module in default package by default
 	 */
 
-	private ApplicationRoutes applicationRoutes = new ApplicationRoutes();
+	private final ApplicationRoutes applicationRoutes = new ApplicationRoutes();
+	private final ApplicationBeans beans = new ApplicationBeans();
+	private final ObjectifyConfig objectifyConfig = new ObjectifyConfig();
 
 	@Override
 	public void requires(DependencyRegistry dependencyRegistry) {
@@ -30,23 +28,13 @@ public class ApplicationModule extends BaseModule {
 	@Override
 	public void configure(UpdatableInjectionContext injectionContext) {
 		super.configure(injectionContext);
-		configureObjectify();
-		// why can't I simply say
-		// injectionContext.inject(ObjectifyApi.class) ???
-		injectionContext.inject(ObjectifyApi.class).as(ObjectifyApi.class);
-		injectionContext.inject(RestaurantDataDao.class).as(RestaurantDataDao.class);
+		objectifyConfig.configure();
+		beans.injectBeans(injectionContext);
 	}
 
 	@Override
 	public void start(UpdatableInjectionContext injectionContext) {
 		super.start(injectionContext);
-		Routes routes = injectionContext.get(Routes.class);
-		applicationRoutes.addRoutes(routes);
-	}
-
-	private void configureObjectify() {
-		ObjectifyService.register(RestaurantData.class);
-		ObjectifyService.register(MenuItem.class);
-		ObjectifyService.register(Order.class);
+		applicationRoutes.addRoutes(injectionContext.get(Routes.class));
 	}
 }

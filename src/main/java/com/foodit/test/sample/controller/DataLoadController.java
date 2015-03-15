@@ -91,7 +91,7 @@ public class DataLoadController {
 			JsonObject orderJson = orderElement.getAsJsonObject();
 
 			Order order = new Order();
-			order.setRestaurant(restaurantData.getRestaurant());
+			order.setRestaurant(restaurantData.getId());
 			order.setId(orderJson.getAsJsonPrimitive("orderId").getAsLong());
 			order.setTotalValue(orderJson.getAsJsonPrimitive("totalValue").getAsBigDecimal());
 			order.setItems(new LinkedList<Item>());
@@ -132,7 +132,7 @@ public class DataLoadController {
 		RestaurantData restaurantLoadData = ofy().load().key(Key.create(RestaurantData.class, restaurant)).now();
 
 		// not much to do here
-		String data = restaurantLoadData.getRestaurant();
+		String data = restaurantLoadData.getId();
 		response.getWriter().write(data);
 		response.setContentLength(data.getBytes().length);
 	}

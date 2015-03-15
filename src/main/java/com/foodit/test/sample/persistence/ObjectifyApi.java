@@ -11,6 +11,10 @@ import com.googlecode.objectify.ObjectifyService;
 @Singleton
 public class ObjectifyApi {
 
+	/*
+	 * Really don't like the static access to the data access api.
+	 */
+
 	public Objectify ofy() {
 		return ObjectifyService.ofy();
 	}

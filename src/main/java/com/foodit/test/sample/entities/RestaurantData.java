@@ -9,22 +9,22 @@ import com.googlecode.objectify.annotation.Id;
 public class RestaurantData {
 
 	@Id
-	private String restaurant;
+	private String id;
 	private OfyBigDecimal sales;
 
 	public RestaurantData() {
 	}
 
-	public RestaurantData(String restaurant) {
-		this.restaurant = restaurant;
+	public RestaurantData(String id) {
+		this.id = id;
 	}
 
-	public String getRestaurant() {
-		return restaurant;
+	public String getId() {
+		return id;
 	}
 
-	public void setRestaurant(String restaurant) {
-		this.restaurant = restaurant;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public BigDecimal getSales() {

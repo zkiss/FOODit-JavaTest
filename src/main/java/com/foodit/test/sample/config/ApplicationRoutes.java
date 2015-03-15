@@ -1,4 +1,5 @@
 package com.foodit.test.sample.config;
+
 import static com.threewks.thundr.route.RouteType.GET;
 
 import com.foodit.test.sample.controller.DataLoadController;
@@ -26,7 +27,8 @@ public class ApplicationRoutes {
 
 	public void addRoutes(Routes routes) {
 		/*
-		 * Thundr seems to be sensitive to renaming controller methods and I did not find a way around this.
+		 * Thundr seems to be sensitive to renaming controller methods and I did not find a way around this. Maybe
+		 * thundr 2.0 is better...
 		 */
 
 		// Loader

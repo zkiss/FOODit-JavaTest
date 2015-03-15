@@ -1,12 +1,12 @@
 package com.foodit.test.sample.controller;
 
+import javax.inject.Inject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map.Entry;
-
-import com.foodit.test.sample.entities.RestaurantData;
 
 import com.foodit.test.sample.controller.message.Meal;
 import com.foodit.test.sample.controller.message.OrderCount;
@@ -15,6 +15,8 @@ import com.foodit.test.sample.controller.message.TopMeals;
 import com.foodit.test.sample.entities.MenuItem;
 import com.foodit.test.sample.entities.Order;
 import com.foodit.test.sample.entities.Order.Item;
+import com.foodit.test.sample.entities.RestaurantData;
+import com.foodit.test.sample.persistence.OrderDao;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 import com.threewks.thundr.logger.Logger;
@@ -22,14 +24,16 @@ import com.threewks.thundr.view.json.JsonView;
 
 public class ReportsController {
 
-	/*
-	 * Really don't like the static access to the data access api.
-	 */
+	@Inject
+	private OrderDao orderDao;
 
 	public JsonView orders(String restaurant) {
 		Logger.info("Counting orders for restaurant: %s", restaurant);
 
-		int count = ObjectifyService.ofy().load().type(Order.class).filter("restaurant", restaurant).count();
+		/*
+		 * This could also be saved to RestaurantData but I thought count should be fast enough
+		 */
+		int count = orderDao.countByRestaurant(restaurant);
 
 		return new JsonView(new OrderCount(count));
 	}
