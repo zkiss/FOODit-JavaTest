@@ -1,8 +1,9 @@
 import com.foodit.test.sample.config.ApplicationRoutes;
-
 import com.foodit.test.sample.entities.MenuItem;
 import com.foodit.test.sample.entities.Order;
 import com.foodit.test.sample.entities.RestaurantData;
+import com.foodit.test.sample.persistence.ObjectifyApi;
+import com.foodit.test.sample.persistence.RestaurantDataDao;
 import com.googlecode.objectify.ObjectifyService;
 import com.threewks.thundr.gae.GaeModule;
 import com.threewks.thundr.gae.objectify.ObjectifyModule;
@@ -30,7 +31,10 @@ public class ApplicationModule extends BaseModule {
 	public void configure(UpdatableInjectionContext injectionContext) {
 		super.configure(injectionContext);
 		configureObjectify();
-		// injectionContext.inject(Test.class).as(Test.class);
+		// why can't I simply say
+		// injectionContext.inject(ObjectifyApi.class) ???
+		injectionContext.inject(ObjectifyApi.class).as(ObjectifyApi.class);
+		injectionContext.inject(RestaurantDataDao.class).as(RestaurantDataDao.class);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.foodit.test.sample.controller;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import com.foodit.test.sample.entities.MenuItem;
 import com.foodit.test.sample.entities.Order;
 import com.foodit.test.sample.entities.Order.Item;
 import com.foodit.test.sample.entities.RestaurantData;
+import com.foodit.test.sample.persistence.RestaurantDataDao;
 import com.google.appengine.labs.repackaged.com.google.common.collect.Lists;
 import com.google.common.io.Resources;
 import com.google.gson.JsonArray;
@@ -31,6 +33,9 @@ import com.threewks.thundr.view.string.StringView;
 import org.apache.commons.io.IOUtils;
 
 public class DataLoadController {
+
+	@Inject
+	private RestaurantDataDao restaurantDataDao;
 
 	public JspView instructions() {
 		return new JspView("instructions.jsp");
@@ -55,7 +60,7 @@ public class DataLoadController {
 		String ordersJson = readFile(String.format("orders-%s.json", restaurant));
 		saveOrders(restaurantLoadData, ordersJson);
 
-		ofy().save().entity(restaurantLoadData).now();
+		restaurantDataDao.save(restaurantLoadData);
 
 		return restaurantLoadData;
 	}
