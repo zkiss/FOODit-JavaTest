@@ -1,4 +1,6 @@
 import com.foodit.test.sample.controller.RestaurantData;
+import com.foodit.test.sample.entities.MenuItem;
+import com.foodit.test.sample.entities.Order;
 import com.googlecode.objectify.ObjectifyService;
 import com.threewks.thundr.gae.GaeModule;
 import com.threewks.thundr.gae.objectify.ObjectifyModule;
@@ -32,5 +34,7 @@ public class ApplicationModule extends BaseModule {
 
 	private void configureObjectify() {
 		ObjectifyService.register(RestaurantData.class);
+		ObjectifyService.register(MenuItem.class);
+		ObjectifyService.register(Order.class);
 	}
 }
