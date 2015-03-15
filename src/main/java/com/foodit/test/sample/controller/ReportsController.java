@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import com.foodit.test.sample.entities.RestaurantData;
+
 import com.foodit.test.sample.controller.message.Meal;
 import com.foodit.test.sample.controller.message.OrderCount;
 import com.foodit.test.sample.controller.message.SalesAmount;

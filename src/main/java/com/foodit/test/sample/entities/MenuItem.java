@@ -1,6 +1,5 @@
 package com.foodit.test.sample.entities;
 
-import com.foodit.test.sample.controller.RestaurantData;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;

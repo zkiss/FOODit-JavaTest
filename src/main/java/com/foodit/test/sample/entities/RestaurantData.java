@@ -1,9 +1,8 @@
-package com.foodit.test.sample.controller;
+package com.foodit.test.sample.entities;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-import com.foodit.test.sample.entities.OfyBigDecimal;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 

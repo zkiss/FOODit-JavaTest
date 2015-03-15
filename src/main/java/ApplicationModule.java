@@ -1,4 +1,5 @@
-import com.foodit.test.sample.controller.RestaurantData;
+import com.foodit.test.sample.entities.RestaurantData;
+
 import com.foodit.test.sample.entities.MenuItem;
 import com.foodit.test.sample.entities.Order;
 import com.googlecode.objectify.ObjectifyService;
