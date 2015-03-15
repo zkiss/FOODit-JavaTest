@@ -1,3 +1,4 @@
+package com.foodit.test.sample;
 import org.junit.Test;
 
 public class ReportsIntegrationTest {
