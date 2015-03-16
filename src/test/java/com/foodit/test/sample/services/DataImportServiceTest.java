@@ -22,7 +22,7 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 
 	/*
 	 * I need a good DI framework for testing implementation from end to end. Using Spring.
-	 *
+	 * 
 	 * Chose to test it this way because this is not sensitive to internal refactoring and movement of logic
 	 */
 
@@ -79,7 +79,7 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 	}
 
 	@Test
-	public void givenMenuItemWithOrders_whenImportFromFile_thenSetsNumbers() throws InterruptedException {
+	public void givenMenuItemWithOrders_whenImportFromFile_thenSetsNumbers() {
 		service.importFromFile("simpleorder");
 
 		LocalServiceTestHelper.endRequest();
