@@ -59,7 +59,7 @@ public class DataImportService {
 				JsonObject itemJson = itemElement.getAsJsonObject();
 				MenuItem item = new MenuItem();
 				item.setRestaurant(Key.create(restaurantData));
-				item.setId(String.valueOf(itemJson.getAsJsonPrimitive("id").getAsLong()));
+				item.setId(itemJson.getAsJsonPrimitive("id").getAsLong());
 				item.setName(itemJson.getAsJsonPrimitive("name").getAsString());
 				item.setCategory(itemJson.getAsJsonPrimitive("category").getAsString());
 				menu.add(item);

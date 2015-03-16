@@ -25,7 +25,7 @@ public class MenuItemDaoTest extends ObjectifyTestBase {
 
 	@Test
 	public void whenSaveAsync_thenDataIsFouncWhenLoaded() {
-		MenuItem item = create("rest", "2");
+		MenuItem item = create("rest", 2);
 
 		dao.saveAsync(item).now();
 
@@ -36,7 +36,7 @@ public class MenuItemDaoTest extends ObjectifyTestBase {
 
 	@Test
 	public void whenLoad_thenReturnsExisting() {
-		MenuItem item = create("rrr", "22");
+		MenuItem item = create("rrr", 22);
 		ofy.save().entity(item).now();
 		ofy.clear();
 
@@ -46,7 +46,7 @@ public class MenuItemDaoTest extends ObjectifyTestBase {
 
 	@Test
 	public void whenSaveAsyncIterable_thenAllAreFound() {
-		List<MenuItem> saved = Arrays.asList(create("aa", "11"), create("bb", "22"));
+		List<MenuItem> saved = Arrays.asList(create("aa", 11), create("bb", 22));
 
 		dao.saveAsync(saved).now();
 
@@ -57,7 +57,7 @@ public class MenuItemDaoTest extends ObjectifyTestBase {
 
 	@Test
 	public void whenLoadAll_thenAllAreFound() {
-		List<MenuItem> saved = Arrays.asList(create("aa", "11"), create("bb", "22"));
+		List<MenuItem> saved = Arrays.asList(create("aa", 11), create("bb", 22));
 		ofy.save().entities(saved).now();
 		ofy.clear();
 
@@ -66,7 +66,7 @@ public class MenuItemDaoTest extends ObjectifyTestBase {
 		assertThat(loaded).containsOnly(saved.toArray(new MenuItem[saved.size()]));
 	}
 
-	private MenuItem create(String restaurantId, String itemId) {
+	private MenuItem create(String restaurantId, long itemId) {
 		MenuItem item = new MenuItem();
 		item.setRestaurant(Key.create(new RestaurantData(restaurantId)));
 		item.setId(itemId);

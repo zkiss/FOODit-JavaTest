@@ -21,7 +21,7 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 
 	/*
 	 * I need a good DI framework for testing implementation from end to end. Using Spring.
-	 * 
+	 *
 	 * Chose to test it this way because this is not sensitive to internal refactoring and movement of logic
 	 */
 
@@ -55,7 +55,7 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 			@Override
 			public boolean matches(MenuItem value) {
 				return value.getCategory().equals("Item Category")
-						&& value.getId().equals("1")
+						&& (value.getId() == 1)
 						&& value.getName().equals("Item Name")
 						&& (value.getOrderCount() == 0)
 						&& value.getRestaurant().equals(Key.create(new RestaurantData("onlymenu")));
@@ -65,7 +65,7 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 			@Override
 			public boolean matches(MenuItem value) {
 				return value.getCategory().equals("Second Category")
-						&& value.getId().equals("2")
+						&& (value.getId() == 2)
 						&& value.getName().equals("Second Item")
 						&& (value.getOrderCount() == 0)
 						&& value.getRestaurant().equals(Key.create(new RestaurantData("onlymenu")));

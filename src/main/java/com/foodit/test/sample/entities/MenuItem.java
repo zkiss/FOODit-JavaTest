@@ -29,12 +29,12 @@ public class MenuItem {
 		this.restaurant = restaurant;
 	}
 
-	public String getId() {
-		return this.id;
+	public long getId() {
+		return Long.parseLong(this.id);
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setId(long id) {
+		this.id = String.valueOf(id);
 	}
 
 	public String getName() {
