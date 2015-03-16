@@ -8,6 +8,7 @@ import com.foodit.test.sample.entities.MenuItem;
 import com.foodit.test.sample.entities.Order;
 import com.foodit.test.sample.entities.RestaurantData;
 import com.foodit.test.sample.persistence.ObjectifyTestBase;
+import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.googlecode.objectify.Key;
 import org.fest.assertions.core.Condition;
 import org.junit.Before;
@@ -37,6 +38,7 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 	public void givenEmptyMenu_whenImportFromFile_thenNoDataSaved() {
 		service.importFromFile("emptymenu");
 
+		LocalServiceTestHelper.endRequest();
 		ofy.clear();
 		int menuCount = ofy.load().type(MenuItem.class).count();
 		assertThat(menuCount).isEqualTo(0);
@@ -48,6 +50,7 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 	public void givenOnlyMenu_whenImportFromFile_thenMenuIsSaved() {
 		service.importFromFile("onlymenu");
 
+		LocalServiceTestHelper.endRequest();
 		ofy.clear();
 		List<MenuItem> menu = ofy.load().type(MenuItem.class).list();
 		assertThat(menu).hasSize(2);
@@ -76,9 +79,10 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 	}
 
 	@Test
-	public void givenMenuItemWithOrders_whenImportFromFile_thenSetsNumbers() {
+	public void givenMenuItemWithOrders_whenImportFromFile_thenSetsNumbers() throws InterruptedException {
 		service.importFromFile("simpleorder");
 
+		LocalServiceTestHelper.endRequest();
 		ofy.clear();
 		MenuItem item = loadMenu("simpleorder", "1");
 		assertThat(item.getOrderCount()).isEqualTo(2);
@@ -91,6 +95,7 @@ public class DataImportServiceTest extends ObjectifyTestBase {
 	public void givenMissingMenuItem_whenImportFromFile_thenDoesNotFail() {
 		service.importFromFile("missingmenuitem");
 
+		LocalServiceTestHelper.endRequest();
 		ofy.clear();
 		int menuCount = ofy.load().type(MenuItem.class).count();
 		assertThat(menuCount).isEqualTo(0);

@@ -70,42 +70,4 @@ public class MenuItem {
 		this.orderCount++;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = (prime * result) + ((this.id == null) ? 0 : this.id.hashCode());
-		result = (prime * result) + ((this.restaurant == null) ? 0 : this.restaurant.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		MenuItem other = (MenuItem) obj;
-		if (this.id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		} else if (!this.id.equals(other.id)) {
-			return false;
-		}
-		if (this.restaurant == null) {
-			if (other.restaurant != null) {
-				return false;
-			}
-		} else if (!this.restaurant.equals(other.restaurant)) {
-			return false;
-		}
-		return true;
-	}
-
 }

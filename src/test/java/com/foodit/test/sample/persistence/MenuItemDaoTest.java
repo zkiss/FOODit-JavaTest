@@ -8,6 +8,7 @@ import java.util.List;
 import com.foodit.test.sample.entities.MenuItem;
 import com.foodit.test.sample.entities.RestaurantData;
 import com.googlecode.objectify.Key;
+import org.fest.assertions.core.Condition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -52,7 +53,18 @@ public class MenuItemDaoTest extends ObjectifyTestBase {
 
 		ofy.clear();
 		List<MenuItem> loaded = ofy.load().type(MenuItem.class).list();
-		assertThat(loaded).containsOnly(saved.toArray(new MenuItem[saved.size()]));
+		assertThat(loaded).areExactly(1, id("aa", 11));
+		assertThat(loaded).areExactly(1, id("bb", 22));
+	}
+
+	private Condition<MenuItem> id(final String restaurant, final long id) {
+		return new Condition<MenuItem>() {
+			@Override
+			public boolean matches(MenuItem value) {
+				return (value.getId() == id)
+						&& value.getRestaurant().equivalent(Key.create(RestaurantData.class, restaurant));
+			}
+		};
 	}
 
 	@Test
@@ -63,7 +75,8 @@ public class MenuItemDaoTest extends ObjectifyTestBase {
 
 		List<MenuItem> loaded = dao.loadAll();
 
-		assertThat(loaded).containsOnly(saved.toArray(new MenuItem[saved.size()]));
+		assertThat(loaded).areExactly(1, id("aa", 11));
+		assertThat(loaded).areExactly(1, id("bb", 22));
 	}
 
 	private MenuItem create(String restaurantId, long itemId) {
