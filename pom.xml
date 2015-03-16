@@ -9,7 +9,6 @@
 		<gae.version>1.8.9</gae.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<thundr.version>1.0.0</thundr.version>
-		<objectify.version>4.0rc1</objectify.version>
 	</properties>
 
 
