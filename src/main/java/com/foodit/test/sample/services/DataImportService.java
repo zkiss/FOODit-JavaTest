@@ -83,7 +83,7 @@ public class DataImportService {
 				JsonObject itemJson = itemElement.getAsJsonObject();
 				if (!itemJson.has("id")) {
 					// skip delivery charges
-					Logger.debug("Skipping order item: " + itemJson.toString());
+					Logger.debug("Skipping order item: %s", itemJson);
 					continue;
 				}
 				Item item = new Item();
