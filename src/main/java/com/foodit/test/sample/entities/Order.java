@@ -17,7 +17,7 @@ public class Order {
 		/*
 		 * Originally I had price in here as well. I ended up not using it but I did not refactor the code to use a
 		 * Key<MenuItem> list instead of this wrapper class.
-		 * 
+		 *
 		 * Originally wanted to have the price here because in case of a price change this is the accurate amount the
 		 * user has spent on this item.
 		 */
@@ -77,32 +77,6 @@ public class Order {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = (prime * result) + (int) (this.id ^ (this.id >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Order other = (Order) obj;
-		if (this.id != other.id) {
-			return false;
-		}
-		return true;
 	}
 
 }

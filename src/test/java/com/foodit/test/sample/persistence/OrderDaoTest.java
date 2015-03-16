@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.foodit.test.sample.entities.Order;
+import org.fest.assertions.core.Condition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -40,7 +41,19 @@ public class OrderDaoTest extends ObjectifyTestBase {
 
 		ofy.clear();
 		List<Order> loaded = ofy.load().type(Order.class).list();
-		assertThat(loaded).containsOnly(saved.toArray(new Order[saved.size()]));
+		assertThat(loaded).areExactly(1, id("aa", 1));
+		assertThat(loaded).areExactly(1, id("aa", 2));
+		assertThat(loaded).areExactly(1, id("cc", 3));
+	}
+
+	private Condition<Order> id(final String restaurant, final long id) {
+		return new Condition<Order>() {
+			@Override
+			public boolean matches(Order value) {
+				return (value.getId() == id)
+						&& value.getRestaurant().equals(restaurant);
+			}
+		};
 	}
 
 	private Order create(String restaurant, long id) {
