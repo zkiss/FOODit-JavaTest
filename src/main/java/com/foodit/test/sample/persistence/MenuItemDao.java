@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.foodit.test.sample.entities.MenuItem;
+import com.foodit.test.sample.entities.RestaurantData;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Result;
 
@@ -32,6 +33,16 @@ public class MenuItemDao {
 
 	public List<MenuItem> loadAll() {
 		return api.ofy().load().type(MenuItem.class).list();
+	}
+
+	public List<MenuItem> loadForRestaurant(String storeId) {
+		/*
+		 * OK, so this is how you filter on ancestor. Same filtering method could be used with Orders. Couldn't find
+		 * this at the time I wrote it.
+		 */
+		return api.ofy().load().type(MenuItem.class)
+				.ancestor(Key.create(new RestaurantData(storeId)))
+				.list();
 	}
 
 }

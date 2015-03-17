@@ -47,14 +47,57 @@ public class MenuItemDaoTest extends ObjectifyTestBase {
 
 	@Test
 	public void whenSaveAsyncIterable_thenAllAreFound() {
-		List<MenuItem> saved = Arrays.asList(create("aa", 11), create("bb", 22));
+		List<MenuItem> saved = Arrays.asList(
+				create("aa", 11),
+				create("bb", 22));
 
 		dao.saveAsync(saved).now();
 
 		ofy.clear();
 		List<MenuItem> loaded = ofy.load().type(MenuItem.class).list();
+		assertThat(loaded).hasSize(2);
 		assertThat(loaded).areExactly(1, id("aa", 11));
 		assertThat(loaded).areExactly(1, id("bb", 22));
+	}
+
+	@Test
+	public void whenLoadAll_thenAllAreFound() {
+		ofy.save().entities(Arrays.asList(
+				create("aa", 11),
+				create("bb", 22)
+				)).now();
+		ofy.clear();
+
+		List<MenuItem> loaded = dao.loadAll();
+
+		assertThat(loaded).hasSize(2);
+		assertThat(loaded).areExactly(1, id("aa", 11));
+		assertThat(loaded).areExactly(1, id("bb", 22));
+	}
+
+	@Test
+	public void whenLoadForRestaurant_thenFindsAllData() {
+		ofy.save().entities(Arrays.asList(
+				create("aa", 1),
+				create("aa", 2),
+				create("aa", 3),
+				create("bb", 22)
+				)).now();
+		ofy.clear();
+
+		List<MenuItem> loaded = dao.loadForRestaurant("aa");
+
+		assertThat(loaded).hasSize(3);
+		assertThat(loaded).areExactly(1, id("aa", 1));
+		assertThat(loaded).areExactly(1, id("aa", 2));
+		assertThat(loaded).areExactly(1, id("aa", 3));
+	}
+
+	private MenuItem create(String restaurantId, long itemId) {
+		MenuItem item = new MenuItem();
+		item.setRestaurant(Key.create(new RestaurantData(restaurantId)));
+		item.setId(itemId);
+		return item;
 	}
 
 	private Condition<MenuItem> id(final String restaurant, final long id) {
@@ -65,24 +108,5 @@ public class MenuItemDaoTest extends ObjectifyTestBase {
 						&& value.getRestaurant().equivalent(Key.create(RestaurantData.class, restaurant));
 			}
 		};
-	}
-
-	@Test
-	public void whenLoadAll_thenAllAreFound() {
-		List<MenuItem> saved = Arrays.asList(create("aa", 11), create("bb", 22));
-		ofy.save().entities(saved).now();
-		ofy.clear();
-
-		List<MenuItem> loaded = dao.loadAll();
-
-		assertThat(loaded).areExactly(1, id("aa", 11));
-		assertThat(loaded).areExactly(1, id("bb", 22));
-	}
-
-	private MenuItem create(String restaurantId, long itemId) {
-		MenuItem item = new MenuItem();
-		item.setRestaurant(Key.create(new RestaurantData(restaurantId)));
-		item.setId(itemId);
-		return item;
 	}
 }

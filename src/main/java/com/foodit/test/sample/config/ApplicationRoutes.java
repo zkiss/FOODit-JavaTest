@@ -62,7 +62,7 @@ public class ApplicationRoutes {
 		routes.addRoute(new Route(GET, "/reports/topmeals", "topmeals"),
 				new MethodAction(ReportsController.class, "topMeals"));
 
-		routes.addRoute(new Route(GET, "/reports/topcategories", "count-orders"),
+		routes.addRoute(new Route(GET, "/reports/topcategories/{restaurant}", "count-orders"),
 				new MethodAction(ReportsController.class, "topCategories"));
 	}
 }
