@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import com.foodit.test.sample.entities.Order;
+import com.foodit.test.sample.entities.RestaurantData;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Result;
 
@@ -20,7 +21,7 @@ public class OrderDao {
 
 	public int countByRestaurant(String restaurantId) {
 		return api.ofy().load().type(Order.class)
-				.filter("restaurant", restaurantId)
+				.ancestor(new RestaurantData(restaurantId))
 				.count();
 	}
 

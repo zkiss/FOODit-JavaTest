@@ -7,7 +7,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.Parent;
 
 @Entity
 public class Order {
@@ -32,14 +32,8 @@ public class Order {
 		}
 	}
 
-	// couldn't filter count if this was a @Parent Key
-	// docs are a bit vague on what and how you can filter on with filterKey
-	/*
-	 * the lack of Key object here is not necessarily bad, but since Objectify explicitly supports references it seems
-	 * semantically wrong not using it when what we are dealing with here is actually an entity relation.
-	 */
-	@Index
-	private String restaurant;
+	@Parent
+	private Key<RestaurantData> restaurant;
 
 	@Id
 	private long id;
@@ -47,11 +41,11 @@ public class Order {
 	private OfyBigDecimal totalValue;
 	private List<Item> items;
 
-	public String getRestaurant() {
+	public Key<RestaurantData> getRestaurant() {
 		return this.restaurant;
 	}
 
-	public void setRestaurant(String restaurant) {
+	public void setRestaurant(Key<RestaurantData> restaurant) {
 		this.restaurant = restaurant;
 	}
 

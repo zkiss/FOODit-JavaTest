@@ -75,7 +75,8 @@ public class DataImportService {
 			JsonObject orderJson = orderElement.getAsJsonObject();
 
 			Order order = new Order();
-			order.setRestaurant(restaurantData.getId());
+			Key<RestaurantData> restaurantKey = Key.create(restaurantData);
+			order.setRestaurant(restaurantKey);
 			order.setId(orderJson.getAsJsonPrimitive("orderId").getAsLong());
 			order.setTotalValue(orderJson.getAsJsonPrimitive("totalValue").getAsBigDecimal());
 			order.setItems(new LinkedList<Item>());
@@ -88,7 +89,7 @@ public class DataImportService {
 				}
 				Item item = new Item();
 				item.setId(Key.create(
-						Key.create(restaurantData),
+						restaurantKey,
 						MenuItem.class,
 						String.valueOf(itemJson.getAsJsonPrimitive("id").getAsLong())));
 				order.getItems().add(item);

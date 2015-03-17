@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.foodit.test.sample.entities.Order;
+import com.foodit.test.sample.entities.RestaurantData;
+import com.googlecode.objectify.Key;
 import org.fest.assertions.core.Condition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +26,10 @@ public class OrderDaoTest extends ObjectifyTestBase {
 
 	@Test
 	public void whenCountByRestaurant_thenCountsOnlyRelevantRestaurants() {
-		List<Order> saved = Arrays.asList(create("aa", 1), create("aa", 2), create("cc", 3));
+		List<Order> saved = Arrays.asList(
+				create("aa", 1),
+				create("aa", 2),
+				create("cc", 3));
 		ofy.save().entities(saved).now();
 		ofy.clear();
 
@@ -35,12 +40,16 @@ public class OrderDaoTest extends ObjectifyTestBase {
 
 	@Test
 	public void whenSaveAsync_thenSavedEntitiesAreFound() {
-		List<Order> saved = Arrays.asList(create("aa", 1), create("aa", 2), create("cc", 3));
+		List<Order> saved = Arrays.asList(
+				create("aa", 1),
+				create("aa", 2),
+				create("cc", 3));
 
 		dao.saveAsync(saved).now();
 
 		ofy.clear();
 		List<Order> loaded = ofy.load().type(Order.class).list();
+		assertThat(loaded).hasSize(3);
 		assertThat(loaded).areExactly(1, id("aa", 1));
 		assertThat(loaded).areExactly(1, id("aa", 2));
 		assertThat(loaded).areExactly(1, id("cc", 3));
@@ -51,14 +60,14 @@ public class OrderDaoTest extends ObjectifyTestBase {
 			@Override
 			public boolean matches(Order value) {
 				return (value.getId() == id)
-						&& value.getRestaurant().equals(restaurant);
+						&& value.getRestaurant().equals(Key.create(new RestaurantData(restaurant)));
 			}
 		};
 	}
 
 	private Order create(String restaurant, long id) {
 		Order order = new Order();
-		order.setRestaurant(restaurant);
+		order.setRestaurant(Key.create(new RestaurantData(restaurant)));
 		order.setId(id);
 		return order;
 	}
