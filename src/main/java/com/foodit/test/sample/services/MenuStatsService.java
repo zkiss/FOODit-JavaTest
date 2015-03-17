@@ -43,9 +43,8 @@ public class MenuStatsService {
 		List<MenuItem> items = dao.loadAll();
 		Collections.sort(items, MENU_COMPARATOR);
 		if (items.size() > limit) {
-			items = items.subList(0, limit);
 			// subList still keeps the whole backing list in the memory, let's get rid of the data we don't need
-			items = new ArrayList<>(items);
+			items = new ArrayList<>(items.subList(0, limit));
 		}
 
 		return items;
