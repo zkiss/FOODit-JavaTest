@@ -82,7 +82,7 @@ public class ReportsController {
 		 */
 
 		// let's do top 10
-		List<MenuItem> items = menuStatsService.getGlobalTopN(10);
+		List<MenuItem> items = menuStatsService.getTopMenuItemsGlobal(10);
 
 		ArrayList<Meal> list = new ArrayList<>(items.size());
 		for (MenuItem item : items) {

@@ -39,11 +39,11 @@ public class MenuStatsService {
 	@Inject
 	private MenuItemDao dao;
 
-	public List<MenuItem> getGlobalTopN(int n) {
+	public List<MenuItem> getTopMenuItemsGlobal(int limit) {
 		List<MenuItem> items = dao.loadAll();
 		Collections.sort(items, MENU_COMPARATOR);
-		if (items.size() > n) {
-			items = items.subList(0, n);
+		if (items.size() > limit) {
+			items = items.subList(0, limit);
 			// subList still keeps the whole backing list in the memory, let's get rid of the data we don't need
 			items = new ArrayList<>(items);
 		}
