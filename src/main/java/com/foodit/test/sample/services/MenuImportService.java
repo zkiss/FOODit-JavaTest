@@ -17,6 +17,10 @@ public class MenuImportService {
 	private MenuItemDao menuDao;
 
 	public void saveMenu(List<MenuItem> menuItems) {
+		/*
+		 * Waiting for the save because menu items are going to be loaded later. Maybe the Objectify cache would ensure
+		 * they are found, but didn't want to take the chance.
+		 */
 		menuDao.saveAsync(menuItems).now();
 	}
 
