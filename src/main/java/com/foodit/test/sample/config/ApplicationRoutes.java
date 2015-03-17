@@ -33,7 +33,12 @@ public class ApplicationRoutes {
 		 * thundr 2.0 is better...
 		 */
 
+		/*
+		 * It seems that overloaded methods cannot be used in thundr. Their names have to differ for unambiguous
+		 * resolution - otherwise there is no control over which one is picked.
+		 */
 		// Loader
+		// GET /load/ is wrong, it changes the state.
 		routes.addRoute(new Route(GET, "/load/", Names.LoadData), new MethodAction(DataLoadController.class, "loadAll"));
 		routes.addRoute(new Route(RouteType.POST, "/load/{restaurant}", Names.LoadDataRestaurant),
 				new MethodAction(DataLoadController.class, "load"));

@@ -10,6 +10,16 @@ public class RestaurantData {
 
 	@Id
 	private String id;
+
+	// Couldn't find a way to serialize BigDecimal.
+	/*
+	 * This relies on an optimistic locking mechanism in place which objectify claims to have.
+	 */
+	/*
+	 * Don't particularly like sales being here. It could have been put in a RestaurantStats entity as well but then
+	 * there would be an implicit assumption that RestaurantData and RestaurantStats pairs have the same primary key.
+	 * Maybe you can put an @Id on a Key attribute? Didn't have time to test every hypothesis.
+	 */
 	private OfyBigDecimal sales;
 
 	public RestaurantData() {
