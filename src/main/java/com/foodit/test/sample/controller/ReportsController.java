@@ -26,7 +26,7 @@ public class ReportsController {
 	 * that these endpoints are called frequently enough so that it is worth it. An other approach could be to calculate
 	 * everything on the fly based on the order and menu item records, but with millions of records that would probably
 	 * take a very long time. And requests would time out.
-	 *
+	 * 
 	 * Long running tasks could probably be executed using the tasks api. To be honest I don't know how to use them
 	 * exactly and with all the research this task required me to do I have prioritised this lower. Practically I am
 	 * unfamiliar with every API here.
@@ -64,16 +64,16 @@ public class ReportsController {
 		/*
 		 * Leaderboard problem. NoSQL is not really suited for this. Depending on how accurate results we want and how
 		 * frequently we need this there are multiple ways to go about this.
-		 * 
+		 *
 		 * 1. export stats to a relational db
 		 * 2. maintain leaderboard periodically in a background task and query that
 		 * 3. build the most accurate leaderboard on the fly and accept the query could run for a while - for this I
 		 * probably should use the task api and have a separate endpoint for querying task execution result. I won't do
 		 * this now, but I recognize the fact that this solution can easily time out.
-		 * 
+		 *
 		 * My expectation is that there are significantly less menu item records than orders and that it is not too bad
 		 * to even iterate them through in a report request.
-		 * 
+		 *
 		 * If menu items don't all fit in the memory then a merge sort can be used by sorting chunks of the data and
 		 * saving the sorted chunks on the disk. Then these chunks can be merged without having to load all the data in
 		 * the memory using a merge sort unti we have a file which contains all the data in order. Then we just have to
@@ -93,6 +93,8 @@ public class ReportsController {
 	}
 
 	public JsonView topCategories(String restaurant) {
+		Logger.info("Calculating top categories for restaurant %s", restaurant);
+
 		List<Category> topCategories = menuStatsService.getTopCategoriesForRestaurant(restaurant, 10);
 		return new JsonView(new TopCategories(topCategories));
 	}
