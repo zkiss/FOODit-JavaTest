@@ -40,3 +40,25 @@ To expose the api's you can simple return a JsonView from your controller method
 http://3wks.github.io/thundr/thundr/views.html
 
 Happy coding :)
+
+## Solution docs
+
+# API
+
+`GET /reports/orders/{restaurant}`: Get total number of orders for a restaurant
+
+`GET /reports/sales/{restaurant}`: Get total value of orders for a restaurant
+
+`GET /reports/topmeals`: Top 10 most popular meals platform-wise
+
+`GET /reports/topcategories/{restaurant}`: Most popular categories for a restaurant
+
+
+
+# AppEngine
+http://foodit-java-test.appspot.com/
+I did not manage to get it running on app-engine
+I have tried using the following tools:
+- command line tool (appengine sdk)
+- maven plugin
+- eclipse plugin
