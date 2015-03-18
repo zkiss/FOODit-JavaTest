@@ -41,21 +41,25 @@ http://3wks.github.io/thundr/thundr/views.html
 
 Happy coding :)
 
-## Solution docs
+# Solution docs
 
-# API
+## API
+
+`GET /reports/orders`: Get total number of orders for all the restaurants in the system
 
 `GET /reports/orders/{restaurant}`: Get total number of orders for a restaurant
+
+`GET /reports/sales`: Get total value of orders for all the restaurants in the system
 
 `GET /reports/sales/{restaurant}`: Get total value of orders for a restaurant
 
 `GET /reports/topmeals`: Top 10 most popular meals platform-wise
 
+`GET /reports/topcategories`: Most popular categories for each restaurant in the system
+
 `GET /reports/topcategories/{restaurant}`: Most popular categories for a restaurant
 
-
-
-# AppEngine
+## AppEngine
 http://foodit-java-test.appspot.com/
 I did not manage to get it running on app-engine
 I have tried using the following tools:

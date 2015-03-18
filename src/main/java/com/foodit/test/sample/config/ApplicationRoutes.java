@@ -53,16 +53,22 @@ public class ApplicationRoutes {
 		 * renaming variable breaks the parameter passing. parameter name is only available if compiled with debug info.
 		 * how does it work if it's not compiled like that???
 		 */
-		routes.addRoute(new Route(GET, "/reports/orders/{restaurant}", "orders-restaurant"),
+		routes.addRoute(new Route(GET, "/reports/orders", "orders"),
 				new MethodAction(ReportsController.class, "orders"));
+		routes.addRoute(new Route(GET, "/reports/orders/{restaurant}", "orders-restaurant"),
+				new MethodAction(ReportsController.class, "ordersRestaurant"));
 
-		routes.addRoute(new Route(GET, "/reports/sales/{restaurant}", "sales-restaurant"),
+		routes.addRoute(new Route(GET, "/reports/sales", "sales"),
 				new MethodAction(ReportsController.class, "sales"));
+		routes.addRoute(new Route(GET, "/reports/sales/{restaurant}", "sales-restaurant"),
+				new MethodAction(ReportsController.class, "salesRestaurant"));
 
-		routes.addRoute(new Route(GET, "/reports/topmeals", "topmeals"),
+		routes.addRoute(new Route(GET, "/reports/topmeals", "top-meals"),
 				new MethodAction(ReportsController.class, "topMeals"));
 
-		routes.addRoute(new Route(GET, "/reports/topcategories/{restaurant}", "count-orders"),
+		routes.addRoute(new Route(GET, "/reports/topcategories", "top-categories"),
 				new MethodAction(ReportsController.class, "topCategories"));
+		routes.addRoute(new Route(GET, "/reports/topcategories/{restaurant}", "top-categories-restaurant"),
+				new MethodAction(ReportsController.class, "topCategoriesRestaurant"));
 	}
 }
