@@ -36,10 +36,6 @@ public class MenuItemDao {
 	}
 
 	public List<MenuItem> loadForRestaurant(String storeId) {
-		/*
-		 * OK, so this is how you filter on ancestor. Same filtering method could be used with Orders. Couldn't find
-		 * this at the time I wrote it.
-		 */
 		return api.ofy().load().type(MenuItem.class)
 				.ancestor(Key.create(new RestaurantData(storeId)))
 				.list();
