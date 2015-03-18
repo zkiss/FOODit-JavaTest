@@ -43,6 +43,8 @@ Happy coding :)
 
 # Solution docs
 
+[Code changes](https://github.com/zkiss/FOODit-JavaTest/compare/test-start...zkiss:master)
+
 ## API
 
 `GET /reports/orders`: Get total number of orders for all the restaurants in the system
@@ -60,7 +62,9 @@ Happy coding :)
 `GET /reports/topcategories/{restaurant}`: Most popular categories for a restaurant
 
 ## AppEngine
+
 http://foodit-java-test.appspot.com/
+
 I did not manage to get it running on app-engine
 I have tried using the following tools:
 - command line tool (appengine sdk)
