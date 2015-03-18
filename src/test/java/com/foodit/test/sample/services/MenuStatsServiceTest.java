@@ -105,8 +105,11 @@ public class MenuStatsServiceTest {
 
 		assertThat(top).hasSize(3);
 		assertThat(top.get(0).getOrderCount()).isEqualTo(7);
+		assertThat(top.get(0).getName()).isEqualTo("C7");
 		assertThat(top.get(1).getOrderCount()).isEqualTo(5);
+		assertThat(top.get(1).getName()).isEqualTo("C5");
 		assertThat(top.get(2).getOrderCount()).isEqualTo(4);
+		assertThat(top.get(2).getName()).isEqualTo("C4");
 	}
 
 	private MenuItem item(int orderCount, String category) {
