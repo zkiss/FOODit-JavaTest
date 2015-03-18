@@ -112,6 +112,30 @@ public class MenuStatsServiceTest {
 		assertThat(top.get(2).getName()).isEqualTo("C4");
 	}
 
+	@Test
+	public void givenEmptyMenu_whenGetTopCategoryForRestaurant_thenReturnsNull() {
+		Category top = service.getTopCategoryForRestaurant(STORE_ID);
+
+		assertThat(top).isNull();
+	}
+
+	@Test
+	public void givenMultipleItemsInCat_whenGetTopCategoryForRestaurant_thenSumsCorrectly() {
+		menu.add(item(6, "C7"));
+		menu.add(item(5, "C5"));
+		menu.add(item(3, "C3"));
+		menu.add(item(1, "C4"));
+		menu.add(item(1, "C4"));
+		menu.add(item(1, "C4"));
+		menu.add(item(1, "C4"));
+		menu.add(item(1, "C7"));
+
+		Category top = service.getTopCategoryForRestaurant(STORE_ID);
+
+		assertThat(top.getOrderCount()).isEqualTo(7);
+		assertThat(top.getName()).isEqualTo("C7");
+	}
+
 	private MenuItem item(int orderCount, String category) {
 		MenuItem mi = new MenuItem();
 		mi.setOrderCount(orderCount);

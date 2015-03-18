@@ -19,9 +19,9 @@ public class OrderDao {
 	@Inject
 	private ObjectifyApi api;
 
-	public int countByRestaurant(String restaurantId) {
+	public int countByRestaurant(String storeId) {
 		return api.ofy().load().type(Order.class)
-				.ancestor(new RestaurantData(restaurantId))
+				.ancestor(new RestaurantData(storeId))
 				.count();
 	}
 

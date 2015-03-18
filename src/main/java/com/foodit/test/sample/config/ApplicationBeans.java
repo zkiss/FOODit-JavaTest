@@ -8,6 +8,7 @@ import com.foodit.test.sample.services.DataImportService;
 import com.foodit.test.sample.services.MenuImportService;
 import com.foodit.test.sample.services.MenuStatsService;
 import com.foodit.test.sample.services.OrderImportService;
+import com.foodit.test.sample.services.RestaurantStatsService;
 import com.threewks.thundr.injection.UpdatableInjectionContext;
 
 public class ApplicationBeans {
@@ -18,6 +19,7 @@ public class ApplicationBeans {
 		inject(injectionContext, OrderDao.class);
 		inject(injectionContext, MenuItemDao.class);
 		inject(injectionContext, MenuStatsService.class);
+		inject(injectionContext, RestaurantStatsService.class);
 		inject(injectionContext, MenuImportService.class);
 		inject(injectionContext, OrderImportService.class);
 		inject(injectionContext, DataImportService.class);

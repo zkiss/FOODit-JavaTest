@@ -22,4 +22,8 @@ public class RestaurantDataDao {
 		return api.load(RestaurantData.class, id);
 	}
 
+	public Iterable<Key<RestaurantData>> getKeys() {
+		return api.ofy().load().type(RestaurantData.class).keys().iterable();
+	}
+
 }
